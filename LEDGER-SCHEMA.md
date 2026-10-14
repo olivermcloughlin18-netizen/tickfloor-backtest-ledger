@@ -23,6 +23,6 @@ Every backtest run appends one JSON object per line to an append-only ledger (`l
 
 ## Pass rule
 
-A strategy passes only if all hold: Benjamini-Hochberg q < 0.1 over the whole ledger family; random-control percentile at least 0.95; positive excess in both halves; enough trades (30 in signal mode, 36 rebalances in portfolio mode); positive net CAGR; at least 2 assets. `recompute-bh.mjs` checks only the first gate, because the rest need data that is not published.
+A strategy passes only if all hold: Benjamini-Hochberg q < 0.1 over the whole ledger family; random-control percentile at least 0.95; positive excess in both halves; enough trades (30 in signal mode, 36 rebalances in portfolio mode); positive net CAGR; at least 2 assets. `recompute-bh.mjs` checks only the first gate (using `data/family-pvalues.json`, the p-value of each of the 801 tests in the family), because the rest need data that is not published.
 
 The public `research-registry.json` carries a subset of these fields: `id`, `name`, `family`, `assetClass`, `beatBuyHoldAfterCosts`, `run`, `excessAnnual`, `p` (= `pExcess`), `q`, `trades`, `nAssets`, `timeframe`, `dataEnd`, `benchmark`, `evidencePath`. A `run` id ending `__robN` is a robustness rerun of the strategy, so its p and q can differ from the original run's.
